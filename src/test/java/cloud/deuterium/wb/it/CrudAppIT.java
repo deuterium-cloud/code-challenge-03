@@ -18,6 +18,8 @@ import java.util.Optional;
 
 import static cloud.deuterium.wb.TestUtil.*;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.springframework.http.HttpHeaders.ACCEPT;
+import static org.springframework.util.MimeTypeUtils.APPLICATION_JSON_VALUE;
 
 /**
  * Created by Milan Stojkovic 26-Mar-2024
@@ -58,6 +60,7 @@ public class CrudAppIT extends BaseIT {
 
         webClient.get()
                 .uri("/api/books")
+                .header(ACCEPT,APPLICATION_JSON_VALUE)
                 .exchange()
                 .expectStatus().is2xxSuccessful()
                 .expectBodyList(TestPageImpl.class)

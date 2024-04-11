@@ -17,6 +17,8 @@ import java.util.Optional;
 
 import static cloud.deuterium.wb.TestUtil.*;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.springframework.http.HttpHeaders.ACCEPT;
+import static org.springframework.util.MimeTypeUtils.APPLICATION_JSON_VALUE;
 
 /**
  * Created by Milan Stojkovic 26-Mar-2024
@@ -95,6 +97,7 @@ public class AuthIT extends BaseIT {
 
         webClient.post()
                 .uri("/api/auth/login")
+                .header(ACCEPT,APPLICATION_JSON_VALUE)
                 .body(Mono.just(loginRequest), LoginRequest.class)
                 .exchange()
                 .expectStatus().isUnauthorized()
